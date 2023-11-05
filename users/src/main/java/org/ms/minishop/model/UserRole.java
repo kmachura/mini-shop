@@ -3,7 +3,8 @@ package org.ms.minishop.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,16 +18,11 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class UserRole {
 
     @Id
     private UUID id;
-    private String username;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String gender;
-    @OneToMany
-    private Set<UserRole> roles;
-
+    private String role;
+    @ManyToMany
+    private Set<User> users;
 }
