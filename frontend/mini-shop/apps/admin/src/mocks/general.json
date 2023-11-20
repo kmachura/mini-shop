@@ -1,0 +1,16 @@
+{
+  "user": {
+    "id": 1000,
+    "username": "johndoe",
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john.doe@gmail.com",
+    "gender": "Male",
+    "roles": [
+      {
+        "id": 1,
+        "role": "admin"
+      }
+    ]
+  }
+}
