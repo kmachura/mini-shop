@@ -1,7 +1,9 @@
 package com.microservices.minishop.products.controller;
 
 import com.microservices.minishop.products.model.Category;
+import com.microservices.minishop.products.model.Product;
 import com.microservices.minishop.products.service.CategoryService;
+import com.microservices.minishop.products.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,35 +20,35 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/categories")
+@RequestMapping("/api/products")
 @AllArgsConstructor
-public class CategoryController {
+public class ProductController {
 
-    private final CategoryService service;
+    private final ProductService service;
 
     @GetMapping
-    public List<Category> getAllCategories() {
+    public List<Product> getAllProducts() {
         return service.findAll();
     }
 
     @PostMapping
-    public Category createCategory(@RequestBody Category category) {
-        return service.createCategory(category);
+    public Product createProduct(@RequestBody Product product) {
+        return service.createProduct(product);
     }
 
-    @GetMapping("/{categoryId}")
-    public ResponseEntity<Category> getCategoryById(@PathVariable UUID categoryId) {
-        return ResponseEntity.ok(service.findCategoryById(categoryId));
+    @GetMapping("/{productId}")
+    public ResponseEntity<Product> getProductById(@PathVariable UUID productId) {
+        return ResponseEntity.ok(service.findProductById(productId));
     }
 
-    @PutMapping("/editCategory/{categoryId}")
-    public ResponseEntity<Category> updateCategory(@PathVariable UUID categoryId, @RequestBody Category categoryDetails) {
-        return ResponseEntity.ok(service.updateCategory(categoryId, categoryDetails));
+    @PutMapping("/editProduct/{productId}")
+    public ResponseEntity<Product> updateProduct(@PathVariable UUID productId, @RequestBody Product productDetails) {
+        return ResponseEntity.ok(service.updateProduct(productId, productDetails));
     }
 
-    @DeleteMapping("/{categoryId}")
-    public ResponseEntity<HttpStatus> deleteCategory(@PathVariable UUID categoryId) {
-        service.deleteCategory(categoryId);
+    @DeleteMapping("/{productId}")
+    public ResponseEntity<HttpStatus> deleteProduct(@PathVariable UUID productId) {
+        service.deleteProduct(productId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

@@ -35,7 +35,7 @@ public class CategoryService {
 
         updateCategory.setName(categoryDetails.getName());
         updateCategory.setDescription(categoryDetails.getDescription());
-        Set<Product> products = categoryDetails.getProducts();
+        Set<Product> products = updateCategory.getProducts();
         products.addAll(categoryDetails.getProducts());
         updateCategory.setProducts(products);
 
