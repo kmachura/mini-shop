@@ -11,5 +11,12 @@ module.exports = {
     extend: {},
   },
   plugins: [
+    require('flowbite/plugin')({
+      forms: false,
+  }),
   ],
+  corePlugins: {
+    // ...
+    forms: false,
+  },
 };
