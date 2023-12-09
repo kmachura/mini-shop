@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { CategoriesService, Category, Product, ProductsService } from '@mini-shop/products';
-import { timer } from 'rxjs';
+import { shareReplay, timer } from 'rxjs';
 
 @Component({
   selector: 'mini-shop-products-form',
@@ -43,7 +43,7 @@ export class ProductsFormComponent {
       categories: [[], Validators.required]
     });
 
-    this.categoriesService.getCategories().subscribe((categories: Category[]) => {
+    this.categoriesService.getCategories().pipe(shareReplay()).subscribe((categories: Category[]) => {
       this.categories = categories;
     });
 
@@ -54,13 +54,18 @@ export class ProductsFormComponent {
     this.formSubmitted = true;
 
     if (this.form.valid) {
+      const id = this.form.controls.id;
+
+      const categories = this.form.get('categories')?.value || [];
+
       const product: Product = {
-        id: null,
+        ...(id !== null && id !== undefined ? { id: id.value } : {}),
         name: this.form.controls.name.value,
         description: this.form.controls.description.value,
         price: this.form.controls.price.value,
-        categories: []
+        categories: categories
       }
+
 
       if (this.editMode) {
         this._updateProduct(product);
@@ -106,6 +111,8 @@ export class ProductsFormComponent {
         this.productsService.getProductById(params.id).subscribe((product) => {
           this.productForm.name.setValue(product.name);
           this.productForm.description.setValue(product.description);
+          this.productForm.price.setValue(product.price);
+          this.productForm.categories.setValue(product.categories);
         })
       }
     });
