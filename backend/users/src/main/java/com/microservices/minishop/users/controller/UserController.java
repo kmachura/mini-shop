@@ -1,6 +1,7 @@
 package com.microservices.minishop.users.controller;
 
 import com.microservices.minishop.users.model.User;
+import com.microservices.minishop.users.model.UserRequest;
 import com.microservices.minishop.users.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -30,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
+    public User createUser(@RequestBody UserRequest user) {
         return service.createUser(user);
     }
 
