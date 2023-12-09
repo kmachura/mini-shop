@@ -4,12 +4,15 @@ import { CategoriesListComponent } from './categories/categories-list/categories
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
 import { ProductsListComponent } from './pages/products/products-list/products-list.component';
+import { UsersFormComponent } from './pages/users/users-form/users-form.component';
+import { UsersListComponent } from './pages/users/users-list/users-list.component';
 import { ShellComponent } from './shared/shell/shell.component';
 
 export const appRoutes: Route[] = [
   {
     path: '',
     component: ShellComponent,
+    // canActivate: [AuthGuard],
     children: [
       {
         path: 'dashboard',
@@ -38,6 +41,18 @@ export const appRoutes: Route[] = [
       {
         path: 'products/form/:id',
         component: ProductsFormComponent
+      },
+      {
+        path: 'users',
+        component: UsersListComponent
+      },
+      {
+        path: 'users/form',
+        component: UsersFormComponent
+      },
+      {
+        path: 'users/form/:id',
+        component: UsersFormComponent
       }
     ]
   }

@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { CategoriesService, Category, Product, ProductsService } from '@mini-shop/products';
-import { Observable, map, startWith, timer } from 'rxjs';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'mini-shop-products-form',
@@ -24,8 +24,6 @@ import { Observable, map, startWith, timer } from 'rxjs';
     padding: auto;
   }
   `]
-
-
 })
 export class ProductsFormComponent {
   form: FormGroup;
@@ -34,9 +32,6 @@ export class ProductsFormComponent {
   currentProductId: number;
   categories: Category[];
   selectedCategories: Category[] = new Array<Category>();
-
-  filteredCategories: Observable<Category[]>;
-  lastFilter: string = '';
 
   constructor(private formBuilder: FormBuilder, private productsService: ProductsService, private categoriesService: CategoriesService, private _snackBar: MatSnackBar, private location: Location, private route: ActivatedRoute) {}
 
@@ -50,64 +45,9 @@ export class ProductsFormComponent {
 
     this.categoriesService.getCategories().subscribe((categories: Category[]) => {
       this.categories = categories;
-
-      this.filteredCategories = this.form.get('categories').valueChanges.pipe(
-        startWith<string | Category[]>(''),
-        map(value => typeof value === 'string' ? value : this.lastFilter),
-        map(filter => this.filter(filter))
-      );
     });
 
     this._checkEditMode();
-  }
-
-  filter(filter: string): Category[] {
-    this.lastFilter = filter;
-    if (filter) {
-      return this.categories.filter(option => {
-        return option.name.toLowerCase().indexOf(filter.toLowerCase()) >= 0;
-      })
-    } else {
-      return this.categories.slice();
-    }
-  }
-
-  displayFn(value: Category[] | string): string | undefined {
-    let displayValue: string;
-    if (Array.isArray(value)) {
-      value.forEach((user, index) => {
-        if (index === 0) {
-          displayValue = user.name;
-        } else {
-          displayValue += ', ' + user.name;
-        }
-      });
-    } else {
-      displayValue = value;
-    }
-    return displayValue;
-  }
-
-  optionClicked(event: Event, category: Category) {
-    event.stopPropagation();
-    this.toggleSelection(category);
-  }
-
-  toggleSelection(category) {
-    console.log(category.selected);
-    if (category.selected === undefined) category.selected = false;
-
-    category.selected = !category.selected;
-    if (category.selected) {
-      this.selectedCategories.push(category);
-    } else {
-      const i = this.selectedCategories.findIndex(value => value.name === category.name);
-      console.log('fdfsdfd', i);
-      this.selectedCategories.splice(i, 1);
-    }
-
-    this.form.get('categories').setValue(this.selectedCategories);
-    console.log(this.form.get('categories'))
   }
 
   saveProduct() {

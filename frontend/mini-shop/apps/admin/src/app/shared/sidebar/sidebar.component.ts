@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '@mini-shop/users';
 
 @Component({
   selector: 'admin-sidebar',
@@ -7,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class SidebarComponent {
 
+  constructor(private authService: AuthService) {}
+
+  logout() {
+    this.authService.logout();
+  }
 }
