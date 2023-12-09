@@ -56,7 +56,7 @@
             </mat-form-field>
             <mat-form-field class="w-full">
               <mat-label>Phone</mat-label>
-              <input matInput placeholder="Enter phone.." formControlName="phone" mask="00 0000 000">
+              <input matInput placeholder="Enter phone.." formControlName="phone" pattern="^[0-9]{9}$">
               <mat-error *ngIf="form.get('phone').hasError('required') && formSubmitted">Field is required</mat-error>
               <mat-error *ngIf="form.get('phone').hasError('pattern') && formSubmitted">This is invalid phone number</mat-error>
             </mat-form-field>
