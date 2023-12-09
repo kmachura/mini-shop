@@ -13,6 +13,7 @@ export class AuthService {
   constructor(private http: HttpClient, private token: LocalstorageService, private router: Router) { }
 
   //zwraca na endpoincie users/login - user: 'email' i token
+
   login(email: string, password: string): Observable<User> {
     return this.http.post<User>(`${this.apiUrl}/login`, { email, password})
   }
