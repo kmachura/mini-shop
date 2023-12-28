@@ -1,1 +1,53 @@
-<p>dashboard works!</p>
+<mat-card class="w-full">
+  <mat-card-header>
+    <mat-card-title>Dashboard</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="grid grid-cols-4 gap-4">
+      <div class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <div class="grid grid-cols-2">
+          <div class="block">
+            <mat-icon class="mr-2" aria-hidden="false" aria-label="Orders icon" fontIcon="local_shipping"></mat-icon>
+            <p class="text-2xl">Orders</p>
+          </div>
+          <div>
+            <p>{{ statistics[0] }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <div class="grid grid-cols-2">
+          <div class="block">
+            <mat-icon class="mr-2" aria-hidden="false" aria-label="Orders icon" fontIcon="local_shipping"></mat-icon>
+            <p class="text-2xl">Customers</p>
+          </div>
+          <div>
+            <p>{{ statistics[1] }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <div class="grid grid-cols-2">
+          <div class="block">
+            <mat-icon class="mr-2" aria-hidden="false" aria-label="Orders icon" fontIcon="local_shipping"></mat-icon>
+            <p class="text-2xl">Products</p>
+          </div>
+          <div>
+            <p>{{ statistics[2] }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <div class="grid grid-cols-2">
+          <div class="block">
+            <mat-icon class="mr-2" aria-hidden="false" aria-label="Orders icon" fontIcon="local_shipping"></mat-icon>
+            <p class="text-2xl">Total Sales</p>
+          </div>
+          <div>
+            <p>{{ statistics[3] }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

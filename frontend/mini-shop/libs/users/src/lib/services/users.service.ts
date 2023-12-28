@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { User } from '../models/user.model';
 
 @Injectable({
@@ -29,5 +29,11 @@ export class UsersService {
 
   deleteUser(id: number) {
     return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+  getUsersCount(): Observable<number> {
+    return this.http
+      .get<number>(`${this.apiUrl}/get/count`)
+      .pipe(map((objectValue: any) => objectValue.userCount));
   }
 }

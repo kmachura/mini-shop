@@ -36,6 +36,8 @@ import { UsersFormComponent } from './pages/users/users-form/users-form.componen
 import { UsersListComponent } from './pages/users/users-list/users-list.component';
 import { ShellComponent } from './shared/shell/shell.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
+import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
     ProductsFormComponent,
     UsersListComponent,
     UsersFormComponent,
-    DeleteUserComponent
+    DeleteUserComponent,
+    OrdersListComponent,
+    OrdersDetailComponent
   ],
   imports: [
     BrowserModule,

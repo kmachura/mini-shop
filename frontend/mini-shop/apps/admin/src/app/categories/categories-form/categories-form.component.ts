@@ -39,8 +39,10 @@ export class CategoriesFormComponent implements OnInit {
     this.formSubmitted = true;
 
     if (this.form.valid) {
+      const id = this.form.controls.id;
+
       const category: Category = {
-        id: null,
+        ...(id !== null && id !== undefined ? { id: id.value } : {}),
         name: this.form.controls.name.value,
         description: this.form.controls.description.value,
         products: []

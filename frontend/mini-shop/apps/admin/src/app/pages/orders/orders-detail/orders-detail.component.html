@@ -1,0 +1,121 @@
+<mat-card class="w-full" *ngIf="order">
+  <mat-card-header>
+    <mat-card-title>View Order</mat-card-title>
+    <mat-card-subtitle>You can edit order status here</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Order details</h5>
+        <div class="grid grid-cols-3 gap-4">
+          <div class="block">
+            <p class="text-sm mb-2 font-bold tracking-tight text-gray-900 dark:text-white">
+              Order Id
+            </p>
+            <p>{{ order.id }}</p>
+          </div>
+          <div class="block">
+            <p class="text-sm mb-2 font-bold tracking-tight text-gray-900 dark:text-white">
+              Order date
+            </p>
+            <p>{{ order.dateOrdered | date: 'short' }}</p>
+          </div>
+          <div class="block">
+            <p class="text-sm mb-2 font-bold tracking-tight text-gray-900 dark:text-white">
+                Order status
+            </p>
+            <mat-form-field>
+              <mat-label>Order status</mat-label>
+              <select matNativeControl required (change)="onStatusChange($event)" [(ngModel)]="selectedStatus">
+                <option *ngFor="let status of statusOptions" [value]="status.name">New</option>
+              </select>
+            </mat-form-field>
+          </div>
+          <div class="block">
+            <p class="text-sm mb-2 font-bold tracking-tight text-gray-900 dark:text-white">
+              Order total price
+            </p>
+            <p> {{ order.totalPrice | currency }} </p>
+          </div>
+        </div>
+    </div>
+    <div class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Order items</h5>
+      <div class="relative overflow-x-auto">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-900 uppercase dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Product name
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Brand
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Category
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Price
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                      Quantity
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                      Subtotal
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let orderItem of order.orderItems" class="bg-white dark:bg-gray-800">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        {{ orderItem.product.name }}
+                    </th>
+                    <td class="px-6 py-4">
+                      {{ orderItem.product.brand }}
+                    </td>
+                    <td class="px-6 py-4">
+                      {{ orderItem.product.category.name }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ orderItem.product.price | currency }}
+                    </td>
+                    <td class="px-6 py-4">
+                      {{ orderItem.product.quantity }}
+                    </td>
+                    <td class="px-6 py-4">
+                      {{ orderItem.product.price * orderItem.product.quantity | currency }}
+                    </td>
+                  </tr>
+            </tbody>
+        </table>
+        <div class="grid grid-cols-2 ml-auto">
+          <h6 class="text-green-500 font-bold">Total</h6>
+          <p class="text-green-500">{{ order.totalPrice }}</p>
+        </div>
+    </div>
+    </div>
+    <div class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Order address</h5>
+      <div class="grid grid-cols-4 gap-4">
+        <div class="block">
+          <p class="font-fold mb-2">Order Address</p>
+          <p>{{ order.shippingAddress1 }}</p>
+          <p>{{ order.shippingAddress2 }}</p>
+          <p>{{ order.zip }} {{ order.city }}</p>
+          <p>{{ order.country }}</p>
+        </div>
+
+        <div class="block">
+          <p class="font-fold mb-2">Customer Info</p>
+          <p>{{ order.user.name }}</p>
+        </div>
+
+        <div class="block">
+          <p class="font-fold mb-2">Contact Info</p>
+          <p>{{ order.phone }}</p>
+        </div>
+      </div>
+
+    </div>
+  </mat-card-content>
+
+</mat-card>
