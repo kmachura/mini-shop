@@ -1,0 +1,51 @@
+<div
+        class="relative overflow-hidden bg-white shadow rounded-xl dark:bg-gray-700"
+      >
+        <div class="relative overflow-hidden">
+          <div class="mb-5 overflow-hidden">
+            <img
+              class="object-cover w-full mx-auto transition-all rounded h-72 hover:scale-110"
+              [src]="img"
+              alt=""
+            />
+          </div>
+          <button
+            class="absolute top-0 left-0 p-3 bg-red-500 rounded-l-none hover:bg-red-600 rounded-b-xl"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="currentColor"
+              class="text-white"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+              ></path>
+            </svg>
+          </button>
+        </div>
+        <a>
+          <h3 class="px-5 mb-4 text-lg font-bold dark:text-white">
+            {{ product.name }}
+          </h3>
+        </a>
+        <div class="flex">
+          <div class="w-1/2 px-5 pb-3">
+            <p class="text-lg font-bold text-red-500 dark:text-red-300">
+              {{ product.price | currency }}
+            </p>
+            <span
+              class="block -mt-1 text-xs font-semibold text-gray-400 line-through"
+              >$399.99</span
+            >
+          </div>
+          <button
+            class="flex-1 text-sm text-white transition-all bg-red-500 rounded-r-none hover:bg-red-600 rounded-t-xl"
+          >
+            Add To Cart
+          </button>
+        </div>
+      </div>

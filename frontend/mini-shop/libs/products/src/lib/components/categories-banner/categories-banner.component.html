@@ -1,0 +1,11 @@
+<div class="container mx-auto py-8">
+  <p class="text-2xl font-bold text-primary-dark">Categories</p>
+  <div class="flex justify-between">
+    <a [routerLink]="'/products/category/' +  category.id" class="w-1/4 p-5 m-5 border border-red-500 rounded-lg text-center" *ngFor="let category of categories">
+      <div class="text-2xl text-red-500 mb-2 justify-center flex">
+        <img src="assets/img/wine.png" class="h-20 mb-4" />
+      </div>
+      <div>{{ category.name }}</div>
+    </a>
+  </div>
+</div>
