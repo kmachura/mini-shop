@@ -3,3 +3,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.shop-container {
+  width: 1200px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+@layer base {
+  @font-face {
+    font-family: "Montserrat";
+    font-weight: 400;
+    src: url('assets/fonts/Montserrat-VariableFont_wght.ttf')
+  }
+}
+
+body {
+  font-family: "Montserrat";
+}
