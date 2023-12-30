@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { OrdersModule } from '@mini-shop/orders';
 import { ProductsModule } from '@mini-shop/products';
 import { UiModule } from '@mini-shop/ui';
 import { AppComponent } from './app.component';
@@ -35,7 +36,8 @@ import { HeaderComponent } from './shared/header/header.component';
     MatIconModule,
     MatDividerModule,
     ProductsModule,
-    HttpClientModule
+    HttpClientModule,
+    OrdersModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

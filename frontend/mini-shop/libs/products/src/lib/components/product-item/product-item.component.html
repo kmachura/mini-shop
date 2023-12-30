@@ -4,6 +4,7 @@
         <div class="relative overflow-hidden">
           <div class="mb-5 overflow-hidden">
             <img
+              [routerLink]="'/products/' + product.id"
               class="object-cover w-full mx-auto transition-all rounded h-72 hover:scale-110"
               [src]="img"
               alt=""
