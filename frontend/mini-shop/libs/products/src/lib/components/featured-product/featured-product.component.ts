@@ -10,28 +10,28 @@ import { ProductsService } from '../../services/products.service';
 export class FeaturedProductComponent implements OnInit, OnDestroy {
   featuredProducts: Product[] | null = [
     {
-      id: 1,
+      id: '1',
       name: 'Product 1',
       price: 49,
       description: 'Desc 1',
       categories: [],
     },
     {
-      id: 2,
+      id: '2',
       name: 'Product 2',
       price: 49,
       description: 'Desc 2',
       categories: [],
     },
     {
-      id: 3,
+      id: '3',
       name: 'Product 3',
       price: 49,
       description: 'Desc 3',
       categories: [],
     },
     {
-      id: 4,
+      id: '4',
       name: 'Product 4',
       price: 49,
       description: 'Desc 4',

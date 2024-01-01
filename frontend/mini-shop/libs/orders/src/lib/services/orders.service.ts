@@ -8,6 +8,7 @@ import { Order } from '../models/order';
 })
 export class OrdersService {
   apiUrl = 'api/orders';
+  apiProductsUrl = 'api/products';
 
   constructor(private http: HttpClient) { }
 
@@ -33,13 +34,17 @@ export class OrdersService {
 
   getOrdersCount(): Observable<number> {
     return this.http
-      .get<number>(`${this.apiUrl}/get/count`)
+      .get<number>(`http://localhost:8083/${this.apiUrl}/get/count`)
       .pipe(map((objectValue: any) => objectValue.orderCount));
   }
 
   getTotalSales(): Observable<number> {
     return this.http
-      .get<number>(`${this.apiUrl}/get/totalsales`)
+      .get<number>(`http://localhost:8083/${this.apiUrl}/get/totalsales`)
       .pipe(map((objectValue: any) => objectValue.totalsales));
+  }
+  // todo
+  getProductById(id: string): Observable<any> {
+    return this.http.get<any>(`http://localhost:8083/${this.apiProductsUrl}/${id}`);
   }
 }

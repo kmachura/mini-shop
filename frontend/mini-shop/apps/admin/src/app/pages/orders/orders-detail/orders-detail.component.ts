@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { Order, OrdersService } from '@mini-shop/orders';
-import { ORDER_STATUS } from '../order.constants';
+import { ORDER_STATUS, Order, OrdersService } from '@mini-shop/orders';
 
 @Component({
   selector: 'mini-shop-orders-detail',

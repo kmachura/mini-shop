@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CartItem, CartService } from '@mini-shop/orders';
 import { Subject, takeUntil } from 'rxjs';
 import { Product } from '../../models/product.model';
 import { ProductsService } from '../../services/products.service';
@@ -15,7 +16,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
   ratingCount = 5;
   quantity = 1;
 
-  constructor(private productsService: ProductsService, private route: ActivatedRoute) {}
+  constructor(private productsService: ProductsService, private cartService: CartService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -46,7 +47,12 @@ export class ProductPageComponent implements OnInit, OnDestroy {
   }
 
   addProductToCart() {
+    const cartItem: CartItem = {
+      productId: this.product.id,
+      quantity: this.quantity,
+    };
 
+    this.cartService.setCartItem(cartItem);
   }
 
   addQuantity() {

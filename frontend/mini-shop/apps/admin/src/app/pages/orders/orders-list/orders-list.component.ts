@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Order, OrdersService } from '@mini-shop/orders';
+import { ORDER_STATUS, Order, OrdersService } from '@mini-shop/orders';
 import { BehaviorSubject, Observable, switchMap } from 'rxjs';
 import { DeleteOrderComponent } from '../dialogs/delete-order/delete-order.component';
-import { ORDER_STATUS } from '../order.constants';
 
 @Component({
   selector: 'mini-shop-orders-list',

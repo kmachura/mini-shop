@@ -1,0 +1,300 @@
+<section class="py-16 bg-gray-100 dark:bg-gray-800">
+  <div class="max-w-6xl px-4 mx-auto">
+      <div class="rounded-lg shadow bg-gray-50 dark:bg-gray-900 dark:border-gray-900">
+          <form [formGroup]="checkoutFormGroup" class="p-6">
+              <div class="pb-6 border-b border-gray-100 dark:border-gray-800 ">
+                  <h2 class="text-xl font-bold text-gray-800 md:text-3xl dark:text-gray-300">
+                      Checkout
+                  </h2>
+              </div>
+              <div class="py-6 border-b border-gray-100 dark:border-gray-800">
+                  <div class="w-full md:w-10/12">
+                      <div class="flex flex-wrap -m-3">
+                          <div class="w-full p-3 md:w-1/3">
+                              <p class="text-base font-semibold text-gray-700 dark:text-gray-400">
+                                  Name
+                              </p>
+                          </div>
+                          <div class="w-full p-3 md:w-1/3">
+                              <input formControlName="firstName"
+                                  class="w-full dark:bg-gray-800 dark:border-gray-800 px-4 dark:placeholder-gray-500 dark:text-gray-400 py-2.5 text-base text-gray-900 rounded-lg font-normal border border-gray-200"
+                                  type="text" placeholder="Adam">
+                                  <span *ngIf="checkoutFormGroup.controls['firstName'].invalid && isSubmitted">First name is required</span>
+                          </div>
+                          <div class="w-full p-3 md:w-1/3">
+                              <input formControlName="lastName"
+                                  class="w-full px-4 py-2.5 dark:bg-gray-800 dark:border-gray-800 dark:placeholder-gray-500 dark:text-gray-400  text-base text-gray-900 rounded-lg font-normal border border-gray-200"
+                                  type="text" placeholder="Smith">
+                                  <span *ngIf="checkoutFormGroup.controls['lastName'].invalid && isSubmitted">Last name is required</span>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="py-6 border-b border-gray-100 dark:border-gray-800">
+                  <div class="w-full md:w-10/12">
+                      <div class="flex flex-wrap mb-2 -m-3">
+                          <div class="w-full p-3 md:w-1/3">
+                              <p class="text-sm font-semibold text-gray-800 dark:text-gray-400">Card details</p>
+                          </div>
+                          <div class="w-full p-3 md:flex-1">
+                              <p class="mb-1.5 font-medium text-base text-gray-800 dark:text-gray-400">Card Number
+                              </p>
+                              <div
+                                  class="flex items-center overflow-hidden border border-gray-200 rounded-lg dark:text-gray-400 dark:border-gray-800 dark:bg-gray-800 focus-within:border-red-500 ">
+                                  <div class="flex-shrink-0 pl-3.5 pr-2">
+                                      <img src="https://i.postimg.cc/YCDxyJ3c/download-removebg-preview-1.png"
+                                          alt="" class="object-contain w-7 h-7">
+                                  </div>
+                                  <input formControlName="cardNumber"
+                                      class="w-full pr-4 py-2.5 text-base dark:bg-gray-800 dark:border-gray-800 dark:placeholder-gray-500 dark:text-gray-400 text-gray-900 font-normal outline-none"
+                                      type="text" placeholder="1283960lk0887ad">
+                              </div>
+                              <span *ngIf="checkoutFormGroup.controls['cardNumber'].invalid && isSubmitted">Card number is required</span>
+                          </div>
+                      </div>
+                      <div class="flex flex-wrap -m-3">
+                          <div class="w-full p-3 md:w-1/3"></div>
+                          <div class="w-full p-3 md:flex-1">
+                              <p class="mb-1.5 font-medium text-base text-gray-800 dark:text-gray-400">Expiry</p>
+                              <input formControlName="cardExpiry"
+                                  class="w-full px-4 py-2.5 dark:bg-gray-800 dark:border-gray-800 dark:placeholder-gray-500 dark:text-gray-400  text-base text-gray-900 rounded-lg font-normal border border-gray-200"
+                                  type="text" placeholder="7/29/2024">
+                          </div>
+
+                      </div>
+                      <div class="flex flex-wrap -m-3">
+                        <div class="w-full p-3 md:w-1/3"></div>
+                        <div class="w-full p-3 md:flex-1">
+                          <span *ngIf="checkoutFormGroup.controls['cardExpiry'].invalid && isSubmitted">Card expiry is required</span>
+                        </div>
+                    </div>
+
+                  </div>
+              </div>
+              <div class="py-6 border-b border-gray-100 dark:border-gray-800 ">
+                  <div class="w-full md:w-10/12">
+                      <div class="flex flex-wrap -m-3">
+                          <div class="w-full p-3 md:w-1/3">
+                              <p class="text-sm font-semibold text-gray-800 dark:text-gray-400">Email address</p>
+                          </div>
+                          <div class="w-full p-3 md:flex-1">
+                              <input
+                                  class="w-full px-4 py-2.5 dark:bg-gray-800 dark:border-gray-800 dark:placeholder-gray-500 dark:text-gray-400  text-base text-gray-900 rounded-lg font-normal border border-gray-200"
+                                  type="email" placeholder="adam@gmail.com">
+                          </div>
+
+                      </div>
+
+                      <div class="flex flex-wrap -m-3">
+                        <div class="w-full p-3 md:w-1/3">
+
+                        </div>
+                        <div class="w-full p-3 md:flex-1">
+                          <span *ngIf="checkoutFormGroup.controls['email'].invalid && isSubmitted">Email is required</span>
+                        </div>
+
+                    </div>
+                  </div>
+              </div>
+              <div class="py-6 dark:border-gray-800">
+                  <div class="w-full md:w-10/12">
+                      <div class="flex flex-wrap -m-3" formGroupName="address">
+                          <div class="w-full p-3 md:w-1/3">
+                              <p class="text-sm font-semibold text-gray-800 dark:text-gray-400">
+                                  Address</p>
+                          </div>
+                          <div class="w-full p-3 md:flex-1">
+                              <div class="flex flex-wrap -m-3">
+                                  <div class="w-full p-3 md:w-1/2">
+                                      <p class="mb-1.5 font-medium text-base text-gray-800 dark:text-gray-400">
+                                          Country</p>
+                                      <select
+                                          formControlName="country"
+                                          class="appearence-none dark:text-gray-400 dark:bg-gray-800  dark:border-gray-800  w-full py-2.5 px-4 text-gray-700 text-base font-normal border border-gray-200 rounded-lg "
+                                          name="" id="">
+                                          <option *ngFor="let country of countries">{{ country.name }}</option>
+                                      </select>
+                                  </div>
+                                  <div class="w-full p-3 md:w-1/2">
+                                      <p class="mb-1.5 font-medium text-base text-gray-800 dark:text-gray-400">
+                                          City</p>
+                                      <input formControlName="city"
+                                          class="w-full px-4 py-2.5 dark:bg-gray-800 dark:border-gray-800 dark:placeholder-gray-500 dark:text-gray-400  text-base text-gray-900 rounded-lg font-normal border border-gray-200"
+                                          type="text" placeholder="City">
+                                          <span *ngIf="checkoutFormGroup.get('address')?.get('city')?.invalid && isSubmitted">City is required</span>
+                                  </div>
+                                  <div class="w-full p-3 md:w-1/2">
+                                      <p class="mb-1.5 font-medium text-base text-gray-800 dark:text-gray-400">
+                                          State / Province
+                                      </p>
+                                      <input formControlName="state"
+                                          class="w-full px-4 py-2.5 dark:bg-gray-800 dark:border-gray-800 dark:placeholder-gray-500 dark:text-gray-400  text-base text-gray-900 rounded-lg font-normal border border-gray-200"
+                                          type="text" placeholder=" State / Province">
+                                          <span *ngIf="checkoutFormGroup.get('address')?.get('state')?.invalid && isSubmitted">State is required</span>
+                                  </div>
+                                  <div class="w-full p-3 md:w-1/2">
+                                      <p class="mb-1.5 font-medium text-base text-gray-800 dark:text-gray-400">
+                                          ZIP / Postal code
+                                      </p>
+                                      <input formControlName="postalCode"
+                                          class="w-full px-4 py-2.5 dark:bg-gray-800 dark:border-gray-800 dark:placeholder-gray-500 dark:text-gray-400  text-base text-gray-900 rounded-lg font-normal border border-gray-200"
+                                          type="text" placeholder=" ZIP / Postal code">
+                                          <span *ngIf="checkoutFormGroup.get('address')?.get('postalCode')?.invalid && isSubmitted">Postal code is required</span>
+                                  </div>
+                                  <div class="w-full p-3">
+                                      <p class="mb-1.5 font-medium text-base text-gray-800 dark:text-gray-400">
+                                          Permanent address</p>
+                                      <input formControlName="street"
+                                          class="w-full px-4 py-2.5 dark:bg-gray-800 dark:border-gray-800 dark:placeholder-gray-500 dark:text-gray-400  text-base text-gray-900 rounded-lg font-normal border border-gray-200"
+                                          type="text" placeholder="  Permanent address">
+                                      <span *ngIf="checkoutFormGroup.get('address')?.get('street')?.invalid && isSubmitted">Address is required</span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="w-full md:w-10/12">
+                  <div class="flex flex-wrap justify-end -m-1.5">
+                      <div class="w-full md:w-auto p-1.5">
+                          <button
+                              class="flex flex-wrap justify-center w-full px-4 py-2 text-sm font-medium text-red-500 bg-white border border-red-500 rounded-md dark:text-gray-300 dark:bg-gray-700 dark:hover:bg-gray-800 dark:border-gray-700 hover:bg-red-100 ">
+                              <p>Cancel</p>
+                          </button>
+                      </div>
+                      <div class="w-full md:w-auto p-1.5">
+                          <button (click)="placeOrder()"
+                              class="flex flex-wrap justify-center w-full px-4 py-2 text-sm font-medium text-white bg-red-500 border border-red-500 rounded-md hover:bg-red-600 ">
+                              <p>Save</p>
+                          </button>
+                      </div>
+                  </div>
+              </div>
+          </form>
+      </div>
+  </div>
+</section>
+
+<!-- <mat-card class="w-full">
+  <mat-card-header>
+    <mat-card-title>{{ editMode ? 'Edit' : 'Add' }} User</mat-card-title>
+    <mat-card-subtitle>You can {{ editMode ? 'edit' : 'add' }} user here</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="grid grid-cols-1 gap-4">
+        <mat-toolbar class="w-full">
+          <button mat-raised-button color="primary" (click)="saveUser()">
+            <mat-icon>create</mat-icon> {{ editMode ? 'Update' : 'Create' }}
+          </button>
+          <span class="example-spacer"></span>
+          <button mat-raised-button color="warning" routerLink="../">
+            <mat-icon>cancel</mat-icon> Cancel
+          </button>
+        </mat-toolbar>
+    </div>
+    <div class="grid grid-cols-1 gap-4 mt-4">
+      <form [formGroup]="form">
+        <div class="grid grid-cols-1">
+          <div class="grid-cols-1">
+            <mat-form-field class="w-full">
+              <mat-label>Username</mat-label>
+              <input matInput placeholder="Enter username.." formControlName="username" required>
+              @if (form.controls.username.invalid || formSubmitted) {
+                <mat-error>Field is required</mat-error>
+              }
+            </mat-form-field>
+          </div>
+          <div class="grid-cols-2">
+            <mat-form-field class="w-full">
+              <mat-label>First Name</mat-label>
+              <input matInput placeholder="Enter first name.." formControlName="firstName" required>
+              @if (form.controls.firstName.invalid || formSubmitted) {
+                <mat-error>Field is required</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field class="w-full">
+              <mat-label>Last Name</mat-label>
+              <input matInput placeholder="Enter last name.." formControlName="lastName" required>
+              @if (form.controls.lastName.invalid || formSubmitted) {
+                <mat-error>Field is required</mat-error>
+              }
+            </mat-form-field>
+          </div>
+          <div class="grid-cols-1">
+            <mat-form-field class="w-full">
+              <mat-label>Email</mat-label>
+              <input matInput email placeholder="Enter email.." formControlName="email" required>
+              @if (form.get('email').hasError('email') || formSubmitted) {
+                <mat-error>Field is required</mat-error>
+              }
+              @if (form.get('email').hasError('email') || formSubmitted) {
+                <mat-error>This is not valid email</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field class="w-full">
+              <mat-label>Phone</mat-label>
+              <input matInput placeholder="Enter phone.." formControlName="phone" pattern="^[0-9]{9}$">
+              <mat-error *ngIf="form.get('phone').hasError('required') && formSubmitted">Field is required</mat-error>
+              <mat-error *ngIf="form.get('phone').hasError('pattern') && formSubmitted">This is invalid phone number</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="grid-cols-1">
+            <mat-form-field class="w-full">
+              <mat-label>Password</mat-label>
+              <input matInput type="password" placeholder="Enter password.." formControlName="password" required>
+              @if (form.controls.password.invalid || formSubmitted) {
+                <mat-error>Field is required</mat-error>
+              }
+            </mat-form-field>
+          </div>
+          <div class="grid-cols-1">
+            <mat-radio-group aria-label="Select gender" formControlName="gender">
+              <mat-radio-button value="male">Male</mat-radio-button>
+              <mat-radio-button value="female">Female</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div class="grid-cols-1">
+            <mat-checkbox aria-label="Is User Admin" formControlName="isAdmin">
+              Is Admin
+            </mat-checkbox>
+          </div>
+          <div formGroup="form.get('address')" class="grid-cols-1 mt-5">
+            <h6 class="text-lg font-bold dark:text-white">Address</h6>
+            <mat-form-field class="w-full">
+              <mat-label>Street</mat-label>
+              <input matInput placeholder="Enter street.." formControlName="street">
+              <mat-error *ngIf="form.get('address.street').hasError('required') && formSubmitted">Field is required</mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-full">
+              <mat-label>Apartment</mat-label>
+              <input matInput placeholder="Enter apartment.." formControlName="apartment">
+              <mat-error *ngIf="form.get('address.apartment').hasError('required') && formSubmitted">Field is required</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="w-full">
+              <mat-label>Postal Code</mat-label>
+              <input matInput placeholder="Enter postal code.." formControlName="postalCode" pattern="^[0-9]{2}(-)?[0-9]{3}$">
+              <mat-error *ngIf="form.get('address.postalCode').hasError('required')">Field is required</mat-error>
+              <mat-error *ngIf="form.get('address.postalCode').hasError('pattern')">Postal Code is invalid</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="w-full">
+              <mat-label>City</mat-label>
+              <input matInput placeholder="Enter city.." formControlName="city">
+            </mat-form-field>
+
+            <mat-form-field class="w-full">
+              <mat-label>Country</mat-label>
+              <input type="text" matInput formControlName="country" [matAutocomplete]="auto">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                @for (option of filteredCountriesOptions | async; track option) {
+                  <mat-option [value]="option">{{option.name}}</mat-option>
+                }
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+    </div>
+  </mat-card-content>
+</mat-card> -->

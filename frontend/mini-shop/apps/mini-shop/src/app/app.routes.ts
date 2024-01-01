@@ -14,5 +14,5 @@ export const appRoutes: Route[] = [
   {
     path: 'products/category/:id',
     component: ProductListComponent,
-  }
+  },
 ];

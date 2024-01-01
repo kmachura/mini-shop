@@ -1,9 +1,8 @@
-import { User } from "@mini-shop/users";
 import { OrderItem } from "./order-item";
 
 export class Order {
   id?: number;
-  orderItem?: OrderItem;
+  orderItems?: OrderItem[];
   shippingAddress1?: string;
   shippingAddress2?: string;
   city?: string;
@@ -12,6 +11,6 @@ export class Order {
   phone?: string;
   status?: number;
   totalPrice?: string;
-  user?: User;
+  user?: any;
   dateOrdered?: string;
 }
