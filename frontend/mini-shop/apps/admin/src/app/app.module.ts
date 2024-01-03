@@ -21,6 +21,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { CategoriesService, ProductsModule } from '@mini-shop/products';
 import { JwtInterceptor, UsersModule } from '@mini-shop/users';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
 import { CategoriesFormComponent } from './categories/categories-form/categories-form.component';
@@ -28,6 +30,8 @@ import { CategoriesListComponent } from './categories/categories-list/categories
 import { DeleteItemComponent } from './dialogs/delete-item/delete-item.component';
 import { NxWelcomeComponent } from './nx-welcome.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
+import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
 import { DeleteProductComponent } from './pages/products/dialogs/delete-item/delete-product.component';
 import { ProductsFormComponent } from './pages/products/products-form/products-form.component';
 import { ProductsListComponent } from './pages/products/products-list/products-list.component';
@@ -36,8 +40,6 @@ import { UsersFormComponent } from './pages/users/users-form/users-form.componen
 import { UsersListComponent } from './pages/users/users-list/users-list.component';
 import { ShellComponent } from './shared/shell/shell.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
-import { OrdersListComponent } from './pages/orders/orders-list/orders-list.component';
-import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detail.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +83,8 @@ import { OrdersDetailComponent } from './pages/orders/orders-detail/orders-detai
     MatFormFieldModule,
     MatRadioModule,
     MatCheckboxModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
   ],
   providers: [CategoriesService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}

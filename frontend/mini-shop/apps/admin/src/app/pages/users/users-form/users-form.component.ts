@@ -25,7 +25,7 @@ export class UsersFormComponent implements OnInit {
   form: FormGroup;
   formSubmitted: boolean = false;
   editMode: boolean = false;
-  currentUserId: number;
+  currentUserId: string;
   filteredCountriesOptions: Observable<{ id: string; name: string; }[]>;
   countries = [];
 
@@ -96,7 +96,7 @@ export class UsersFormComponent implements OnInit {
         lastName: this.form.controls.lastName.value,
         email: this.form.controls.email.value,
         gender: this.form.controls.gender.value,
-        roles: this.form.controls.isAdmin.value ? [{id: 0, role: 'admin'}, {id:1, role: 'client'}]: [{id:1, role: 'client'}],
+        roles: this.form.controls.isAdmin.value ? [{id: '0', role: 'admin'}, {id:'1', role: 'client'}]: [{id:'1', role: 'client'}],
         password: this.form.controls.password.value,
         phone: this.form.controls.phone.value,
         address: this.form.controls.address.value ?? {}

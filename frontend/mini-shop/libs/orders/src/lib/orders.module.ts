@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatBadgeModule } from '@angular/material/badge';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '@mini-shop/users';
 import { CartIconComponent } from './components/cart-icon/cart-icon.component';
 import { OrderSummaryComponent } from './components/order-summary/order-summary.component';
 import { CartPageComponent } from './pages/cart-page/cart-page.component';
@@ -17,6 +18,7 @@ const routes: Routes = [
     },
     {
       path: 'checkout',
+      canActivate: [AuthGuard],
       component: CheckoutPageComponent
     },
     {

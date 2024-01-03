@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UsersService } from '@mini-shop/users';
 import * as countriesLib from 'i18n-iso-countries';
-import { Observable, map, of, startWith } from 'rxjs';
+import { Observable, Subject, map, of, startWith, takeUntil } from 'rxjs';
 import { Cart } from '../../models/cart';
 import { Order } from '../../models/order';
 import { OrderItem } from '../../models/order-item';
@@ -15,18 +16,19 @@ declare const require: any;
   selector: 'orders-checkout-page',
   templateUrl: './checkout-page.component.html',
 })
-export class CheckoutPageComponent implements OnInit {
+export class CheckoutPageComponent implements OnInit, OnDestroy {
   checkoutFormGroup!: FormGroup;
   isSubmitted = false;
   orderItems: OrderItem[] = [];
-  userId!: string;
+  userId!: string | undefined;
   countries!: { id: string; name: string; }[];
   filteredCountriesOptions!: Observable<{ id: string; name: string; }[]>;
-
-  constructor(private formBuilder: FormBuilder, private cartService: CartService, private ordersService: OrdersService, private router: Router) {}
+  endSubs$: Subject<void> = new Subject();
+  constructor(private formBuilder: FormBuilder, private cartService: CartService, private ordersService: OrdersService, private router: Router, private usersService: UsersService) {}
 
   ngOnInit() {
     this._initCheckoutForm();
+    // this._autoFillUserData();
     this._getCartItems();
     this._getCountries();
 
@@ -37,6 +39,20 @@ export class CheckoutPageComponent implements OnInit {
         return name ? this._filter(name as string) : this.countries.slice();
       }),
     ) || of([]);
+  }
+
+  private _autoFillUserData() {
+    this.usersService.observeCurrentUser().pipe(takeUntil(this.endSubs$)).subscribe((user) => {
+      if (user) {
+        this.userId = user.id;
+        this.checkoutForm['firstName'].setValue(user?.firstName);
+        this.checkoutForm['lastName'].setValue(user?.lastName);
+        this.checkoutFormGroup.get('address')?.get('postalCode')?.setValue(user.address?.postalCode);
+        this.checkoutForm['phone'].setValue(user?.phone);
+        this.checkoutFormGroup.get('address')?.get('city')?.setValue(user.address?.city);
+        this.checkoutFormGroup.get('address')?.get('country')?.setValue(user.address?.country);
+      }
+    });
   }
 
   private _getCartItems() {
@@ -104,7 +120,7 @@ export class CheckoutPageComponent implements OnInit {
       zip: this.checkoutFormGroup.get('address')?.get('postalCode')?.value,
       country: this.checkoutFormGroup.get('address')?.get('country')?.value,
       phone: this.checkoutFormGroup.get('phone')?.value,
-      user: '1',
+      user: this.userId,
       status: 0,
       dateOrdered: `${Date.now()}`
     };
@@ -119,5 +135,10 @@ export class CheckoutPageComponent implements OnInit {
 
   get checkoutForm() {
     return this.checkoutFormGroup.controls;
+  }
+
+  ngOnDestroy(): void {
+    this.endSubs$.next();
+    this.endSubs$.complete();
   }
 }

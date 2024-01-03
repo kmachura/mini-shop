@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
@@ -11,6 +11,9 @@ import { RouterModule } from '@angular/router';
 import { OrdersModule } from '@mini-shop/orders';
 import { ProductsModule } from '@mini-shop/products';
 import { UiModule } from '@mini-shop/ui';
+import { JwtInterceptor, UsersModule } from '@mini-shop/users';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
 import { HomePageComponent } from './pages/home-page/home-page.component';
@@ -30,6 +33,8 @@ import { HeaderComponent } from './shared/header/header.component';
     BrowserModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
     HttpClientModule,
     UiModule,
     MatButtonModule,
@@ -38,8 +43,11 @@ import { HeaderComponent } from './shared/header/header.component';
     MatDividerModule,
     ProductsModule,
     OrdersModule,
+    UsersModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -29,7 +29,7 @@ export class ProductsFormComponent {
   form: FormGroup;
   formSubmitted: boolean = false;
   editMode: boolean = false;
-  currentProductId: number;
+  currentProductId: string;
   categories: Category[];
   selectedCategories: Category[] = new Array<Category>();
 

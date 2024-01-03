@@ -26,7 +26,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
     })
   }
 
-  private _getProduct(_id: number) {
+  private _getProduct(_id: string) {
     this.productsService.getProductById(_id).pipe(takeUntil(this.endSubs$)).subscribe((product: Product) => {
       this.product = product;
     });
