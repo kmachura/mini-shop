@@ -24,7 +24,7 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
   countries!: { id: string; name: string; }[];
   filteredCountriesOptions!: Observable<{ id: string; name: string; }[]>;
   endSubs$: Subject<void> = new Subject();
-  constructor(private formBuilder: FormBuilder, private cartService: CartService, private ordersService: OrdersService, private router: Router, private usersService: UsersService) {}
+  constructor(private formBuilder: FormBuilder, private cartService: CartService, private ordersService: OrdersService, private router: Router, private usersService: UsersService ) {}
 
   ngOnInit() {
     this._initCheckoutForm();
@@ -112,7 +112,6 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
 
     if(this.checkoutFormGroup.invalid) return;
 
-
     const order: Order = {
       orderItems: this.orderItems,
       shippingAddress1: this.checkoutFormGroup.get('address')?.get('street')?.value,
@@ -125,11 +124,12 @@ export class CheckoutPageComponent implements OnInit, OnDestroy {
       dateOrdered: `${Date.now()}`
     };
 
-    this.ordersService.createOrder(order).subscribe(() => {
-      this.router.navigate(['/success']);
-      this.cartService.emptyCart();
-    }, () => {
-      // TODO display error
+    this.ordersService.cacheOrderData(order);
+
+    this.ordersService.createCheckoutSession(this.orderItems).subscribe(error => {
+      if (error) {
+        console.log(' ERROR ');
+      }
     })
   }
 

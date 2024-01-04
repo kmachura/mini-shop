@@ -23,6 +23,7 @@ import { CategoriesService, ProductsModule } from '@mini-shop/products';
 import { JwtInterceptor, UsersModule } from '@mini-shop/users';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { NgxStripeModule } from 'ngx-stripe';
 import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
 import { CategoriesFormComponent } from './categories/categories-form/categories-form.component';
@@ -85,6 +86,7 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
     MatCheckboxModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
+    NgxStripeModule.forRoot('pk_test_51OUWVMAGcWmmOfbaDlK4bcnEtB6c4hipQQH79Qcet64nXjhmD9jZKGmvdJudhavdQTeZQWSHyQPh1FREDM4FfheA00WjFfTmQC'),
   ],
   providers: [CategoriesService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}

@@ -14,6 +14,7 @@ import { UiModule } from '@mini-shop/ui';
 import { JwtInterceptor, UsersModule } from '@mini-shop/users';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { NgxStripeModule } from 'ngx-stripe';
 import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
 import { HomePageComponent } from './pages/home-page/home-page.component';
@@ -43,7 +44,8 @@ import { HeaderComponent } from './shared/header/header.component';
     MatDividerModule,
     ProductsModule,
     OrdersModule,
-    UsersModule
+    UsersModule,
+    NgxStripeModule.forRoot('pk_test_51OUWVMAGcWmmOfbaDlK4bcnEtB6c4hipQQH79Qcet64nXjhmD9jZKGmvdJudhavdQTeZQWSHyQPh1FREDM4FfheA00WjFfTmQC'),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

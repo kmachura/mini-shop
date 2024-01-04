@@ -19,9 +19,11 @@
     "@ngrx/entity": "^17.0.1",
     "@ngrx/store": "^17.0.1",
     "@nx/angular": "17.1.2",
+    "@stripe/stripe-js": "^2.2.2",
     "flowbite": "^2.1.1",
     "i18n-iso-countries": "^7.7.0",
     "ngx-mask": "^15.1.5",
+    "ngx-stripe": "^17.0.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "0.14.2"
