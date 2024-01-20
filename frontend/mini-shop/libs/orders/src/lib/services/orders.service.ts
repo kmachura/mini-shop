@@ -31,7 +31,7 @@ export class OrdersService {
   }
 
   updateOrder(orderStatus: { status: string }, orderId: number): Observable<Order> {
-    return this.http.put<Order>(`http://localhost:8083/editOrder/${this.apiUrl}/${orderId}`, orderStatus);
+    return this.http.put<Order>(`http://localhost:8083/${this.apiUrl}/editOrder/${orderId}`, orderStatus);
   }
 
   deleteOrder(id: number) {
@@ -56,7 +56,7 @@ export class OrdersService {
 
 
   createCheckoutSession(orderItem: OrderItem[]) {
-    return this.http.post<CheckoutSessionResponse>(`${this.apiUrl}/create-checkout-session`, orderItem).pipe(
+    return this.http.post<CheckoutSessionResponse>(`http://localhost:8083/${this.apiUrl}/create-checkout-session`, orderItem).pipe(
       switchMap((session) => {
         return this.stripeService.redirectToCheckout({ sessionId: session.id });
       })
