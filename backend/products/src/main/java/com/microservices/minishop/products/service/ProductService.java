@@ -67,9 +67,7 @@ public class ProductService {
         updateProduct.setPrice(productDetails.getPrice());
         productDetails.getCategories().stream().forEach(category -> {
             Optional<Category> cat = categoryRepository.findById(category.getId());
-            if (cat.isEmpty()) {
-                cat = Optional.of(new Category());
-            } else {
+            if (cat.isPresent()) {
                 cat.get().setId(category.getId());
                 updateProduct.addCategory(cat.get());
             }

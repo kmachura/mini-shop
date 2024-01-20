@@ -32,6 +32,7 @@ public class Product {
     private String name;
     private String description;
     private BigDecimal price;
+    private Integer quantity;
     @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     @JsonIgnoreProperties("products")
     private Set<Category> categories;
