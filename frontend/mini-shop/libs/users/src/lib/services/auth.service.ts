@@ -9,7 +9,7 @@ import { LocalstorageService } from './localstorage.service';
   providedIn: 'root'
 })
 export class AuthService {
-  apiUrl = 'http://localhost:8084/api/users'
+  apiUrl = 'http://localhost:8084/api/auth'
   constructor(private http: HttpClient, private token: LocalstorageService, private router: Router) { }
 
   //zwraca na endpoincie users/login - user: 'email' i token
