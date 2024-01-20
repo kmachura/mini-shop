@@ -19,34 +19,34 @@ export class OrdersService {
   constructor(private http: HttpClient, private stripeService: StripeService) { }
 
   getOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(`http://localhost:8083/${this.apiUrl}`);
+    return this.http.get<Order[]>(`http://localhost:8082/${this.apiUrl}`);
   }
 
   getOrderById(id: number): Observable<Order> {
-    return this.http.get<Order>(`http://localhost:8083/${this.apiUrl}/${id}`);
+    return this.http.get<Order>(`http://localhost:8082/${this.apiUrl}/${id}`);
   }
 
   createOrder(order: Order): Observable<Order> {
-    return this.http.post<Order>(`http://localhost:8083/${this.apiUrl}`, order);
+    return this.http.post<Order>(`http://localhost:8082/${this.apiUrl}`, order);
   }
 
   updateOrder(orderStatus: { status: string }, orderId: number): Observable<Order> {
-    return this.http.put<Order>(`http://localhost:8083/${this.apiUrl}/editOrder/${orderId}`, orderStatus);
+    return this.http.put<Order>(`http://localhost:8082/${this.apiUrl}/editOrder/${orderId}`, orderStatus);
   }
 
   deleteOrder(id: number) {
-    return this.http.delete(`http://localhost:8083/${this.apiUrl}/${id}`);
+    return this.http.delete(`http://localhost:8082/${this.apiUrl}/${id}`);
   }
 
   getOrdersCount(): Observable<number> {
     return this.http
-      .get<number>(`http://localhost:8083/${this.apiUrl}/get/count`)
+      .get<number>(`http://localhost:8082/${this.apiUrl}/get/count`)
       .pipe(map((objectValue: any) => objectValue.orderCount));
   }
 
   getTotalSales(): Observable<number> {
     return this.http
-      .get<number>(`http://localhost:8083/${this.apiUrl}/get/totalsales`)
+      .get<number>(`http://localhost:8082/${this.apiUrl}/get/totalsales`)
       .pipe(map((objectValue: any) => objectValue.totalsales));
   }
   // todo
@@ -56,7 +56,7 @@ export class OrdersService {
 
 
   createCheckoutSession(orderItem: OrderItem[]) {
-    return this.http.post<CheckoutSessionResponse>(`http://localhost:8083/${this.apiUrl}/create-checkout-session`, orderItem).pipe(
+    return this.http.post<CheckoutSessionResponse>(`http://localhost:8082/${this.apiUrl}/create-checkout-session`, orderItem).pipe(
       switchMap((session) => {
         return this.stripeService.redirectToCheckout({ sessionId: session.id });
       })
