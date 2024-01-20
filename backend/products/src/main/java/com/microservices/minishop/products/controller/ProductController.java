@@ -1,8 +1,8 @@
 package com.microservices.minishop.products.controller;
 
-import java.util.List;
-import java.util.UUID;
-
+import com.microservices.minishop.products.model.Product;
+import com.microservices.minishop.products.service.ProductService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,12 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.microservices.minishop.products.model.Product;
-import com.microservices.minishop.products.service.ProductService;
-
-import lombok.AllArgsConstructor;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/products")
@@ -29,8 +27,8 @@ public class ProductController {
     private final ProductService service;
 
     @GetMapping
-    public List<Product> getAllProducts() {
-        return service.findAll();
+    public List<Product> getAllProducts(@RequestParam(required = false) List<Long> categoryFilters) {
+        return service.findAll(categoryFilters);
     }
 
     @PostMapping
@@ -39,19 +37,29 @@ public class ProductController {
     }
 
     @GetMapping("/{productId}")
-    public ResponseEntity<Product> getProductById(@PathVariable UUID productId) {
+    public ResponseEntity<Product> getProductById(@PathVariable String productId) {
         return ResponseEntity.ok(service.findProductById(productId));
     }
 
     @PutMapping("/editProduct/{productId}")
-    public ResponseEntity<Product> updateProduct(@PathVariable UUID productId, @RequestBody Product productDetails) {
+    public ResponseEntity<Product> updateProduct(@PathVariable String productId, @RequestBody Product productDetails) {
         return ResponseEntity.ok(service.updateProduct(productId, productDetails));
     }
 
     @DeleteMapping("/{productId}")
-    public ResponseEntity<HttpStatus> deleteProduct(@PathVariable UUID productId) {
+    public ResponseEntity<HttpStatus> deleteProduct(@PathVariable String productId) {
         service.deleteProduct(productId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/get/count")
+    public ResponseEntity<Long> getProductCount() {
+        return ResponseEntity.ok(service.getProductCount());
+    }
+
+    @GetMapping("/get/featured/{count}")
+    public ResponseEntity<List<Product>> getFeaturedProducts(@PathVariable Long count) {
+        return ResponseEntity.ok(service.getFeaturedProducts(count));
     }
 }
 

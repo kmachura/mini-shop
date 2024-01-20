@@ -17,7 +17,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="'USER'")
+@Table(name="users")
 public class User {
 
     @Id

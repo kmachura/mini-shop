@@ -1,8 +1,8 @@
 package com.microservices.minishop.products.controller;
 
-import java.util.List;
-import java.util.UUID;
-
+import com.microservices.minishop.products.model.Category;
+import com.microservices.minishop.products.service.CategoryService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,10 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.microservices.minishop.products.model.Category;
-import com.microservices.minishop.products.service.CategoryService;
-
-import lombok.AllArgsConstructor;
+import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/categories")
@@ -39,17 +37,17 @@ public class CategoryController {
     }
 
     @GetMapping("/{categoryId}")
-    public ResponseEntity<Category> getCategoryById(@PathVariable UUID categoryId) {
+    public ResponseEntity<Category> getCategoryById(@PathVariable Long categoryId) {
         return ResponseEntity.ok(service.findCategoryById(categoryId));
     }
 
     @PutMapping("/editCategory/{categoryId}")
-    public ResponseEntity<Category> updateCategory(@PathVariable UUID categoryId, @RequestBody Category categoryDetails) {
+    public ResponseEntity<Category> updateCategory(@PathVariable Long categoryId, @RequestBody Category categoryDetails) {
         return ResponseEntity.ok(service.updateCategory(categoryId, categoryDetails));
     }
 
     @DeleteMapping("/{categoryId}")
-    public ResponseEntity<HttpStatus> deleteCategory(@PathVariable UUID categoryId) {
+    public ResponseEntity<HttpStatus> deleteCategory(@PathVariable Long categoryId) {
         service.deleteCategory(categoryId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
