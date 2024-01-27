@@ -1,0 +1,79 @@
+version: '3'
+
+services:
+  eureka:
+    image: openjdk:17-jdk-slim
+    ports:
+      - "8761:8761"
+    command: ["java", "-jar", "/app/eureka.jar"]
+    volumes:
+      - ./eureka/target/eureka.jar:/app/eureka.jar
+    networks:
+      - microservices-network
+
+  deliveries:
+    image: openjdk:17-jdk-slim
+    ports:
+      - "8081:8081"
+    command: ["java", "-jar", "/app/deliveries.jar"]
+    volumes:
+      - ./deliveries/target/deliveries.jar:/app/deliveries.jar
+    depends_on:
+      - eureka
+    networks:
+      - microservices-network
+
+  orders:
+    image: openjdk:17-jdk-slim
+    ports:
+      - "8082:8082"
+    command: ["java", "-jar", "/app/orders.jar"]
+    volumes:
+      - ./orders/target/orders.jar:/app/orders.jar
+    depends_on:
+      - eureka
+    networks:
+      - microservices-network
+
+  products:
+    image: openjdk:17-jdk-slim
+    ports:
+      - "8083:8083"
+    command: ["java", "-jar", "/app/products.jar"]
+    volumes:
+      - ./products/target/products.jar:/app/products.jar
+    depends_on:
+      - eureka
+    networks:
+      - microservices-network
+
+  users:
+    image: openjdk:17-jdk-slim
+    ports:
+      - "8084:8084"
+    command: ["java", "-jar", "/app/users.jar"]
+    volumes:
+      - ./users/target/users.jar:/app/users.jar
+    depends_on:
+      - eureka
+    networks:
+      - microservices-network
+
+  api-gateway:
+    image: openjdk:17-jdk-slim
+    ports:
+      - "9191:9191"
+    command: ["java", "-jar", "/app/api-gateway.jar"]
+    volumes:
+      - ./api-gateway/target/api-gateway.jar:/app/api-gateway.jar
+    depends_on:
+      - eureka
+      - orders
+      - deliveries
+      - products
+      - users
+    networks:
+      - microservices-network
+
+networks:
+  microservices-network:
