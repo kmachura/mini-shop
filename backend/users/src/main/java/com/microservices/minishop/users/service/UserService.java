@@ -2,26 +2,20 @@ package com.microservices.minishop.users.service;
 
 import com.microservices.minishop.users.model.User;
 import com.microservices.minishop.users.model.UserRequest;
-import com.microservices.minishop.users.model.UserRole;
 import com.microservices.minishop.users.repository.UserRepository;
-import com.microservices.minishop.users.repository.UserRoleRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
-import static com.microservices.minishop.users.model.UserRole.createUserRole;
 
 @Service
 @AllArgsConstructor
 public class UserService {
 
     private final UserRepository repository;
-    private final UserRoleRepository roleRepository;
+//    private final UserRoleRepository roleRepository;
 
     public List<User> findAll() {
         return repository.findAll();
@@ -34,9 +28,7 @@ public class UserService {
         user.setLastName(userRequest.getLastName());
         user.setGender(userRequest.getGender());
         user.setUsername(userRequest.getUsername());
-        user.setRoles(userRequest.getRoles().stream().map(x -> createUserRole(UUID.randomUUID().toString(), x.getRole())).collect(Collectors.toSet()));
-
-        roleRepository.saveAll(user.getRoles());
+        user.setRole(userRequest.getUserRole());
         return repository.save(user);
     }
 
@@ -55,14 +47,15 @@ public class UserService {
         updateUser.setPassword(userDetails.getPassword());
         updateUser.setPhone(userDetails.getPhone());
         updateUser.setAdrress(userDetails.getAdrress());
+        updateUser.setRole(userDetails.getRole());
 
-        userDetails.getRoles().stream().forEach(role -> {
-            Optional<UserRole> userRole = roleRepository.findById(role.getId());
-            if (userRole.isPresent()) {
-                userRole.get().setId(role.getId());
-                updateUser.addUserRole(userRole.get());
-            }
-        });
+//        userDetails.getRoles().stream().forEach(role -> {
+//            Optional<UserRole> userRole = roleRepository.findById(role.getId());
+//            if (userRole.isPresent()) {
+//                userRole.get().setId(role.getId());
+//                updateUser.addUserRole(userRole.get());
+//            }
+//        });
 
         return repository.save(updateUser);
     }

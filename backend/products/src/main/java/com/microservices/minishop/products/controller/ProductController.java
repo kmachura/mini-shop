@@ -1,6 +1,7 @@
 package com.microservices.minishop.products.controller;
 
 import com.microservices.minishop.products.model.Product;
+import com.microservices.minishop.products.service.OrdersServiceFeignClient;
 import com.microservices.minishop.products.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,11 +26,19 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService service;
+    private final OrdersServiceFeignClient ordersServiceFeignClient;
 
     @GetMapping
     public List<Product> getAllProducts(@RequestParam(required = false) List<Long> categoryFilters) {
         return service.findAll(categoryFilters);
     }
+
+    @GetMapping("/orders")
+    public ResponseEntity<String> getAllOrders() {
+        String orders = ordersServiceFeignClient.getOrders();
+        return ResponseEntity.ok("Orders: " + orders);
+    }
+
 
     @PostMapping
     public Product createProduct(@RequestBody Product product) {

@@ -1,4 +1,4 @@
-package com.microservices.minishop.orders.model;
+package com.microservices.minishop.deliveries.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,18 +9,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serializable;
-
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderItem implements Serializable {
+public class Delivery {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-    private String productId;
-    private Integer quantity;
+    private String delivery;
 }

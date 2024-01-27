@@ -5,18 +5,15 @@ import com.microservices.minishop.orders.model.Order;
 import com.microservices.minishop.orders.model.OrderItem;
 import com.microservices.minishop.orders.repository.OrderItemRepository;
 import com.microservices.minishop.orders.repository.OrderRepository;
+import jakarta.jms.ObjectMessage;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 import java.util.random.RandomGenerator;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -24,13 +21,17 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final OrderItemRepository orderItemRepository;
+    private final JmsTemplate jmsTemplate;
+
 
     public List<Order> findAll() {
         return orderRepository.findAll();
     }
 
     public Order createOrder(Order order) {
-        return orderRepository.save(order);
+        Order created = orderRepository.save(order);
+        placeOrder(created);
+        return created;
     }
 
     public Order findOrderById(String orderId) {
@@ -82,6 +83,13 @@ public class OrderService {
         CheckoutSessionResponse sessionResponse = new CheckoutSessionResponse();
         sessionResponse.setId(id);
         return sessionResponse;
+    }
+
+    public String placeOrder(Order order) {
+
+        jmsTemplate.convertAndSend("ordersQueue", "New Order:" + order.getId());
+
+        return "Order placed successfully!";
     }
 }
 

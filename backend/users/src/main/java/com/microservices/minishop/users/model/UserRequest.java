@@ -20,7 +20,7 @@ public class UserRequest {
     private String lastName;
     private String email;
     private String gender;
-    private Set<UserRoleRequest> roles;
+    private UserRole userRole;
     private String password;
     private Long phone;
     private Address adrress;

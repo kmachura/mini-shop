@@ -7,6 +7,7 @@ import com.microservices.minishop.orders.service.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +31,11 @@ public class OrderController {
     @GetMapping
     public List<Order> getAllOrders() {
         return service.findAll();
+    }
+
+    @GetMapping("/all")
+    public String getOrders() {
+        return "Orders: " + service.findAll().stream().map(Order::getId).toList();
     }
 
     @PostMapping
